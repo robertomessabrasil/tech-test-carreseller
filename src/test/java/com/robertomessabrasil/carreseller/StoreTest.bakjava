@@ -1,0 +1,84 @@
+package com.robertomessabrasil.carreseller;
+
+import com.robertomessabrasil.carreseller.aggregate.StoreAggregate;
+import com.robertomessabrasil.carreseller.aggregate.UserAggregate;
+import com.robertomessabrasil.carreseller.domain.entity.OpportunityEntity;
+import com.robertomessabrasil.carreseller.domain.entity.StoreEntity;
+import com.robertomessabrasil.carreseller.domain.entity.UserEntity;
+import com.robertomessabrasil.carreseller.domain.error.exception.OperationDeniedException;
+import com.robertomessabrasil.carreseller.domain.error.exception.UserNotFoundException;
+import com.robertomessabrasil.carreseller.domain.repository.IOpportunityRepository;
+import com.robertomessabrasil.carreseller.domain.repository.IStoreRepository;
+import com.robertomessabrasil.carreseller.domain.repository.IUserRepository;
+import com.robertomessabrasil.carreseller.domain.service.StoreService;
+import com.robertomessabrasil.carreseller.domain.service.UserService;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
+
+@ExtendWith(MockitoExtension.class)
+public class StoreTest {
+
+    @Mock
+    IUserRepository userRepository;
+
+    @Mock
+    IStoreRepository storeRepository;
+
+    @Mock
+    IOpportunityRepository opportunityRepository;
+
+    @Test
+    @Disabled
+    void givenParameters_createStore() throws UserNotFoundException, OperationDeniedException {
+
+        int adminUserId = 1;
+        int storeId = 1;
+        int opportunityId = 1;
+
+        UserEntity adminUser = new UserEntity();
+        adminUser.setId(adminUserId);
+
+        StoreEntity store = new StoreEntity();
+        store.setId(storeId);
+
+        OpportunityEntity opportunity = new OpportunityEntity();
+        opportunity.setId(opportunityId);
+
+        when(this.userRepository.findById(adminUserId)).thenReturn(Optional.of(adminUser));
+        when(this.storeRepository.create(store)).thenReturn(store);
+        when(this.storeRepository.findById(storeId)).thenReturn(Optional.of(st));
+        when(this.opportunityRepository.findById(userId)).thenReturn(Optional.of(userAggregate));
+
+        Optional<UserAggregate> user = StoreService.createStore(storeName, cnpj, password, this.userRepository);
+
+        assertEquals(userId, user.get().getId());
+
+    }
+
+    @Test
+    @Disabled
+    void givenUserId_findUser() {
+
+        int userId = 1;
+
+        UserEntity userEntity = new UserEntity();
+
+        UserAggregate userAggregate = new UserAggregate();
+        userAggregate.setId(userId);
+
+        when(this.userRepository.findById(1)).thenReturn(Optional.of(userAggregate));
+
+        Optional<UserAggregate> user = UserService.findUserById(userId, this.userRepository);
+
+        assertEquals(userId, user.get().getId());
+
+    }
+}
