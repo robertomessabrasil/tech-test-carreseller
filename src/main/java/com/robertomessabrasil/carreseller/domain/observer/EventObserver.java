@@ -18,7 +18,6 @@ public class EventObserver {
 
     public void notify(Event event) throws InterruptException {
 
-        boolean mustInterrupt = false;
         this.interruptEvent = null;
 
         for (EventListener eventListener : this.listeners) {
@@ -26,14 +25,10 @@ public class EventObserver {
                 if (event.getClass().equals(eventOfInterest.getClass())) {
                     if (eventListener.handleEvent(event)) {
                         this.interruptEvent = event;
-                        mustInterrupt = true;
+                        throw new InterruptException();
                     }
                 }
             }
-        }
-
-        if (mustInterrupt) {
-            throw new InterruptException();
         }
 
     }

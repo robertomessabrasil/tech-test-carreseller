@@ -4,16 +4,14 @@ import com.robertomessabrasil.carreseller.domain.entity.user.UserEntity;
 import com.robertomessabrasil.carreseller.domain.entity.user.event.UserValidationEvent;
 import com.robertomessabrasil.carreseller.domain.exception.InterruptException;
 import com.robertomessabrasil.carreseller.domain.observer.EventObserver;
-import com.robertomessabrasil.carreseller.domain.observer.listener.Event;
-import com.robertomessabrasil.carreseller.domain.observer.listener.error.ValidationListener;
 import com.robertomessabrasil.carreseller.domain.observer.listener.security.SecurityListener;
+import com.robertomessabrasil.carreseller.domain.observer.listener.validation.ValidationListener;
 import com.robertomessabrasil.carreseller.domain.repository.IUserRepository;
 import com.robertomessabrasil.carreseller.domain.service.user.UserService;
 import com.robertomessabrasil.carreseller.domain.service.user.event.InvalidRoleEvent;
 import com.robertomessabrasil.carreseller.valueobject.UserRoleEnum;
 import com.robertomessabrasil.carreseller.valueobject.UserRoleVO;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -31,8 +29,22 @@ public class UserTest {
     @Mock
     IUserRepository userRepository;
 
+    SecurityListener securityListener = new SecurityListener();
+    ValidationListener validationListener = new ValidationListener();
+    EventObserver eventObserver = new EventObserver();
+
+    @BeforeEach
+    void setUp() {
+
+        securityListener.setEvents(List.of(new InvalidRoleEvent()));
+        validationListener.setEvents(List.of(new UserValidationEvent()));
+        eventObserver.subscribe(securityListener);
+        eventObserver.subscribe(validationListener);
+
+    }
+
     @Test
-    void givenParameters_createUser() {
+    void givenParameters_createUser() throws InterruptException {
 
         int adminUserId = 1;
         int userId = 2;
@@ -57,35 +69,8 @@ public class UserTest {
         observer.subscribe(securityListener);
         observer.subscribe(validationListener);
 
-        try {
-            UserEntity userCreated = UserService.createUser(adminUser, user, this.userRepository, observer);
-            assertEquals(userId, user.getId());
-        } catch (InterruptException ex) {
-            Event event = observer.getInterruptEvent();
-            if (event instanceof InvalidRoleEvent) {
-                InvalidRoleEvent userValidationEvent = (InvalidRoleEvent) event;
-                return;
-            }
-            if (event instanceof UserValidationEvent) {
-                UserValidationEvent userValidationEvent = (UserValidationEvent) event;
-                userValidationEvent.getCodes().forEach(System.out::println);
-                return;
-            }
-        }
-
-    }
-
-    SecurityListener securityListener = new SecurityListener();
-    ValidationListener validationListener = new ValidationListener();
-    EventObserver eventObserver = new EventObserver();
-
-    @BeforeEach
-    void setUp() {
-
-        securityListener.setEvents(List.of(new InvalidRoleEvent()));
-        validationListener.setEvents(List.of(new UserValidationEvent()));
-        eventObserver.subscribe(securityListener);
-        eventObserver.subscribe(validationListener);
+        UserEntity userCreated = UserService.createUser(adminUser, user, this.userRepository, observer);
+        assertEquals(userId, user.getId());
 
     }
 

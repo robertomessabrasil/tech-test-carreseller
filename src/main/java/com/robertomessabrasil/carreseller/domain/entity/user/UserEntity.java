@@ -62,7 +62,6 @@ public class UserEntity {
         UserValidationEvent userValidationEvent = new UserValidationEvent();
         if (this.getName() == null) {
             userValidationEvent.addCode(UserValidationCode.INVALID_NAME);
-            userValidationEvent.setInterrupt(true);
         }
         if (this.getEmail() == null) {
             userValidationEvent.addCode(UserValidationCode.INVALID_EMAIL);
