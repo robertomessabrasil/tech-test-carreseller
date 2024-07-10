@@ -1,9 +1,9 @@
 package com.robertomessabrasil.carreseller.domain.service;
 
 import com.robertomessabrasil.carreseller.domain.entity.*;
-import com.robertomessabrasil.carreseller.domain.error.exception.OperationDeniedException;
-import com.robertomessabrasil.carreseller.domain.error.exception.StoreNotFoundException;
-import com.robertomessabrasil.carreseller.domain.error.exception.UserNotFoundException;
+import com.robertomessabrasil.carreseller.domain.observer.exception.OperationDeniedException;
+import com.robertomessabrasil.carreseller.domain.observer.exception.StoreNotFoundException;
+import com.robertomessabrasil.carreseller.domain.observer.exception.UserNotFoundException;
 import com.robertomessabrasil.carreseller.domain.repository.IOpportunityRepository;
 import com.robertomessabrasil.carreseller.domain.repository.IStoreRepository;
 import com.robertomessabrasil.carreseller.valueobject.OpportunityStatusVO;
@@ -11,7 +11,7 @@ import com.robertomessabrasil.carreseller.valueobject.UserRoleVO;
 
 import java.util.Optional;
 
-import static com.robertomessabrasil.carreseller.domain.service.UserService.checkRole;
+import static com.robertomessabrasil.carreseller.domain.service.user.UserService.checkRole;
 
 public class StoreService {
 

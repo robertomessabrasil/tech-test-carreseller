@@ -1,7 +1,7 @@
 package com.robertomessabrasil.carreseller.domain.repository;
 
-import com.robertomessabrasil.carreseller.domain.entity.UserEntity;
-import com.robertomessabrasil.carreseller.domain.error.EventObserver;
+import com.robertomessabrasil.carreseller.domain.entity.user.UserEntity;
+import com.robertomessabrasil.carreseller.domain.observer.EventObserver;
 
 import java.util.Optional;
 

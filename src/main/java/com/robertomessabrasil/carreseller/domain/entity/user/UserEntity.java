@@ -1,13 +1,10 @@
-package com.robertomessabrasil.carreseller.domain.entity;
+package com.robertomessabrasil.carreseller.domain.entity.user;
 
-import com.robertomessabrasil.carreseller.domain.error.Event;
-import com.robertomessabrasil.carreseller.domain.error.EventCodeEnum;
-import com.robertomessabrasil.carreseller.domain.error.EventObserver;
-import com.robertomessabrasil.carreseller.domain.exception.ObserverException;
+import com.robertomessabrasil.carreseller.domain.entity.user.event.UserValidationCode;
+import com.robertomessabrasil.carreseller.domain.entity.user.event.UserValidationEvent;
+import com.robertomessabrasil.carreseller.domain.exception.InterruptException;
+import com.robertomessabrasil.carreseller.domain.observer.EventObserver;
 import com.robertomessabrasil.carreseller.valueobject.UserRoleVO;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class UserEntity {
 
@@ -61,16 +58,16 @@ public class UserEntity {
                 '}';
     }
 
-    public void validate(EventObserver observer) throws ObserverException {
-        List<String> messages = new ArrayList<>();
+    public void validate(EventObserver observer) throws InterruptException {
+        UserValidationEvent userValidationEvent = new UserValidationEvent();
         if (this.getName() == null) {
-            messages.add("invalid name");
+            userValidationEvent.addCode(UserValidationCode.INVALID_NAME);
+            userValidationEvent.setInterrupt(true);
         }
         if (this.getEmail() == null) {
-            messages.add("invalid email");
+            userValidationEvent.addCode(UserValidationCode.INVALID_EMAIL);
         }
-        Event event = new Event(EventCodeEnum.ERROR_INVALIDINPUT).setMessages(messages.toArray(new String[0]));
-        observer.notify(event);
+        observer.notify(userValidationEvent);
     }
 }
 

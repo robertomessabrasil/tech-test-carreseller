@@ -1,5 +1,7 @@
 package com.robertomessabrasil.carreseller.domain.entity;
 
+import com.robertomessabrasil.carreseller.domain.entity.user.UserEntity;
+
 import java.util.List;
 
 public class StoreEntity {

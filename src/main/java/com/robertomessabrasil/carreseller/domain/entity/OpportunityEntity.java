@@ -1,5 +1,6 @@
 package com.robertomessabrasil.carreseller.domain.entity;
 
+import com.robertomessabrasil.carreseller.domain.entity.user.UserEntity;
 import com.robertomessabrasil.carreseller.valueobject.OpportunityStatusVO;
 
 public class OpportunityEntity {
