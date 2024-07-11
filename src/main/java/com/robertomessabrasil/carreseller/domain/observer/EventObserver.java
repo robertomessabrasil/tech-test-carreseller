@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventObserver {
-    private boolean interrupt = false;
+    private boolean interruptFlow = false;
     private Event interruptEvent;
     private List<EventListener> listeners = new ArrayList<>();
 
@@ -21,8 +21,8 @@ public class EventObserver {
         this.interruptEvent = null;
 
         for (EventListener eventListener : this.listeners) {
-            for (Event eventOfInterest : eventListener.getEvents()) {
-                if (event.getClass().equals(eventOfInterest.getClass())) {
+            for (Class<? extends Event> eventOfInterest : eventListener.getEventsOfInterest()) {
+                if (event.getClass().equals(eventOfInterest)) {
                     if (eventListener.handleEvent(event)) {
                         this.interruptEvent = event;
                         throw new InterruptException();
@@ -33,12 +33,12 @@ public class EventObserver {
 
     }
 
-    public boolean isInterrupt() {
-        return interrupt;
+    public boolean isInterruptFlow() {
+        return interruptFlow;
     }
 
-    public EventObserver setInterrupt(boolean interrupt) {
-        this.interrupt = interrupt;
+    public EventObserver setInterruptFlow(boolean interruptFlow) {
+        this.interruptFlow = interruptFlow;
         return this;
     }
 

@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 abstract public class EventListener {
-    private List<Event> eventsOfInterest = new ArrayList<>();
+    private List<Class<? extends Event>> eventsOfInterest = new ArrayList<>();
 
     public boolean handleEvent(Event event) {
         return event.isInterrupt();
     }
 
-    public void setEvents(List<Event> eventsOfInterest) {
+    public void setEventsOfInterest(List<Class<? extends Event>> eventsOfInterest) {
         this.eventsOfInterest = eventsOfInterest;
     }
 
-    public List<Event> getEvents() {
+    public List<Class<? extends Event>> getEventsOfInterest() {
         return this.eventsOfInterest;
     }
 

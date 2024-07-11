@@ -1,4 +1,4 @@
-package com.robertomessabrasil.carreseller.valueobject;
+package com.robertomessabrasil.carreseller.domain.entity.user;
 
 public final class UserRoleVO {
 

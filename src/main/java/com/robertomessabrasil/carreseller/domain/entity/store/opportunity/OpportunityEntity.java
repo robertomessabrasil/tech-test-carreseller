@@ -1,7 +1,9 @@
-package com.robertomessabrasil.carreseller.domain.entity;
+package com.robertomessabrasil.carreseller.domain.entity.store.opportunity;
 
+import com.robertomessabrasil.carreseller.domain.entity.store.CustomerEntity;
+import com.robertomessabrasil.carreseller.domain.entity.store.VehicleEntity;
 import com.robertomessabrasil.carreseller.domain.entity.user.UserEntity;
-import com.robertomessabrasil.carreseller.valueobject.OpportunityStatusVO;
+import com.robertomessabrasil.carreseller.domain.observer.EventObserver;
 
 public class OpportunityEntity {
     private int id;
@@ -53,5 +55,8 @@ public class OpportunityEntity {
     public OpportunityEntity setVehicle(VehicleEntity vehicle) {
         this.vehicle = vehicle;
         return this;
+    }
+
+    public void validate(EventObserver eventObserver) {
     }
 }

@@ -1,6 +1,9 @@
 package com.robertomessabrasil.carreseller.domain.repository;
 
-import com.robertomessabrasil.carreseller.domain.entity.*;
+import com.robertomessabrasil.carreseller.domain.entity.store.CustomerEntity;
+import com.robertomessabrasil.carreseller.domain.entity.store.VehicleEntity;
+import com.robertomessabrasil.carreseller.domain.entity.store.opportunity.OpportunityEntity;
+import com.robertomessabrasil.carreseller.domain.observer.EventObserver;
 
 import java.util.Optional;
 
@@ -10,5 +13,5 @@ public interface IOpportunityRepository {
 
     Optional<OpportunityEntity> findById(int opportunityId);
 
-    OpportunityEntity create(OpportunityEntity opportunity);
+    OpportunityEntity create(OpportunityEntity opportunity, EventObserver eventObserver);
 }

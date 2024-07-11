@@ -1,4 +1,6 @@
-package com.robertomessabrasil.carreseller.domain.entity;
+package com.robertomessabrasil.carreseller.domain.entity.store;
+
+import com.robertomessabrasil.carreseller.domain.observer.EventObserver;
 
 public class CustomerEntity {
     private String name;
@@ -38,6 +40,10 @@ public class CustomerEntity {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 '}';
+    }
+
+    public void validate(EventObserver eventObserver) {
+
     }
 }
 

@@ -1,18 +1,20 @@
 package com.robertomessabrasil.carreseller;
 
+import com.robertomessabrasil.carreseller.domain.entity.store.StoreEntity;
 import com.robertomessabrasil.carreseller.domain.entity.user.UserEntity;
+import com.robertomessabrasil.carreseller.domain.entity.user.UserRoleEnum;
+import com.robertomessabrasil.carreseller.domain.entity.user.UserRoleVO;
 import com.robertomessabrasil.carreseller.domain.entity.user.event.UserValidationEvent;
 import com.robertomessabrasil.carreseller.domain.exception.InterruptException;
 import com.robertomessabrasil.carreseller.domain.observer.EventObserver;
 import com.robertomessabrasil.carreseller.domain.observer.listener.security.SecurityListener;
 import com.robertomessabrasil.carreseller.domain.observer.listener.validation.ValidationListener;
+import com.robertomessabrasil.carreseller.domain.repository.IOpportunityRepository;
+import com.robertomessabrasil.carreseller.domain.repository.IStoreRepository;
 import com.robertomessabrasil.carreseller.domain.repository.IUserRepository;
-import com.robertomessabrasil.carreseller.domain.service.user.UserService;
+import com.robertomessabrasil.carreseller.domain.service.StoreService;
 import com.robertomessabrasil.carreseller.domain.service.user.event.InvalidRoleEvent;
-import com.robertomessabrasil.carreseller.domain.entity.user.UserRoleEnum;
-import com.robertomessabrasil.carreseller.domain.entity.user.UserRoleVO;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -21,14 +23,14 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class UserTest {
+public class StoreTest {
 
     @Mock
-    IUserRepository userRepository;
+    IStoreRepository storeRepository;
 
     EventObserver eventObserver = new EventObserver();
 
@@ -46,39 +48,39 @@ public class UserTest {
     }
 
     @Test
-    void givenParameters_createUser() throws InterruptException {
+    void givenParameters_createStore() throws InterruptException {
 
         int adminUserId = 1;
-        int userId = 2;
         UserRoleVO adminRole = new UserRoleVO(UserRoleEnum.ADMIN);
-        UserRoleVO role = new UserRoleVO(UserRoleEnum.STORE_USER);
-
         UserEntity adminUser = new UserEntity();
         adminUser.setId(adminUserId);
         adminUser.setRole(adminRole);
 
-        UserEntity userEntity = new UserEntity();
-        userEntity.setId(userId);
-        userEntity.setName("Roberto Messa");
+        int storeId = 1;
+        String storeName = "We'll sell your car";
+        StoreEntity storeEntity = new StoreEntity();
+        storeEntity.setId(storeId);
+        storeEntity.setName(storeName);
 
-        UserEntity userCreated = UserService.createUser(adminUser, userEntity, this.userRepository, this.eventObserver);
-        assertEquals(userId, userEntity.getId());
+        when(this.storeRepository.create(storeEntity)).thenReturn(storeEntity);
+
+        storeEntity = StoreService.createStore(adminUser, storeEntity, this.storeRepository, this.eventObserver);
+        assertEquals(storeId, storeEntity.getId());
 
     }
 
     @Test
-    void givenUserId_findUser() throws InterruptException {
+    void givenStoreId_findStore() {
 
-        int userId = 1;
+        int storeId = 1;
+        StoreEntity storeEntity = new StoreEntity();
+        storeEntity.setId(storeId);
 
-        UserEntity userEntity = new UserEntity();
-        userEntity.setId(userId);
+        when(this.storeRepository.findById(storeId, this.eventObserver)).thenReturn(Optional.of(storeEntity));
 
-        when(this.userRepository.findById(userId, this.eventObserver)).thenReturn(Optional.of(userEntity));
-
-        Optional<UserEntity> foundUser = UserService.findUserById(userId, this.userRepository, this.eventObserver);
-
-        assertEquals(userId, foundUser.get().getId());
+        Optional<StoreEntity> foundStore = StoreService.findStoreById(storeId, this.storeRepository, this.eventObserver);
+        assertEquals(storeId, foundStore.get().getId());
 
     }
+
 }

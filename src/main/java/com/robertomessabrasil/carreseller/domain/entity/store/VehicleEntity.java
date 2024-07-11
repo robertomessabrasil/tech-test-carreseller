@@ -1,4 +1,6 @@
-package com.robertomessabrasil.carreseller.domain.entity;
+package com.robertomessabrasil.carreseller.domain.entity.store;
+
+import com.robertomessabrasil.carreseller.domain.observer.EventObserver;
 
 public class VehicleEntity {
     private int id;
@@ -50,5 +52,9 @@ public class VehicleEntity {
     public VehicleEntity setYear(String year) {
         this.year = year;
         return this;
+    }
+
+    public void validate(EventObserver eventObserver) {
+
     }
 }

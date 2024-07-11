@@ -1,4 +1,4 @@
-package com.robertomessabrasil.carreseller.valueobject;
+package com.robertomessabrasil.carreseller.domain.entity.store.opportunity;
 
 public enum OpportunityStatusEnum {
     NEW(0), IN_PROGRESS(1), FINISHED(2);

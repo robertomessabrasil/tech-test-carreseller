@@ -4,7 +4,6 @@ import com.robertomessabrasil.carreseller.domain.entity.user.event.UserValidatio
 import com.robertomessabrasil.carreseller.domain.entity.user.event.UserValidationEvent;
 import com.robertomessabrasil.carreseller.domain.exception.InterruptException;
 import com.robertomessabrasil.carreseller.domain.observer.EventObserver;
-import com.robertomessabrasil.carreseller.valueobject.UserRoleVO;
 
 public class UserEntity {
 
@@ -58,15 +57,15 @@ public class UserEntity {
                 '}';
     }
 
-    public void validate(EventObserver observer) throws InterruptException {
-        UserValidationEvent userValidationEvent = new UserValidationEvent();
+    public void validate(EventObserver eventObserver) throws InterruptException {
+        UserValidationEvent userValidationEvent = new UserValidationEvent(this);
         if (this.getName() == null) {
             userValidationEvent.addCode(UserValidationCode.INVALID_NAME);
         }
         if (this.getEmail() == null) {
             userValidationEvent.addCode(UserValidationCode.INVALID_EMAIL);
         }
-        observer.notify(userValidationEvent);
+        eventObserver.notify(userValidationEvent);
     }
 }
 
