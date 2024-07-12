@@ -30,13 +30,13 @@
                 <configuration>
                     <source>11</source>
                     <target>11</target>
-                    <excludes>
-                        <exclude>com/robertomessabrasil/carreseller/domain/service/StoreService.java</exclude>
-                        <exclude>com/robertomessabrasil/carreseller/domain/service/StoreService.java</exclude>
-                    </excludes>
-                    <testExcludes>
-                        <testExclude>com/robertomessabrasil/carreseller/StoreTest.java</testExclude>
-                    </testExcludes>
+<!--                    <excludes>-->
+<!--                        <exclude>com/robertomessabrasil/carreseller/domain/service/StoreService.java</exclude>-->
+<!--                        <exclude>com/robertomessabrasil/carreseller/domain/service/StoreService.java</exclude>-->
+<!--                    </excludes>-->
+<!--                    <testExcludes>-->
+<!--                        <testExclude>com/robertomessabrasil/carreseller/StoreTest.java</testExclude>-->
+<!--                    </testExcludes>-->
                 </configuration>
             </plugin>
         </plugins>

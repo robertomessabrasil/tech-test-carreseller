@@ -48,18 +48,18 @@ public class UserTest {
     @Test
     void givenParameters_createUser() throws InterruptException {
 
-        int adminUserId = 1;
-        int userId = 2;
-        UserRoleVO adminRole = new UserRoleVO(UserRoleEnum.ADMIN);
-        UserRoleVO role = new UserRoleVO(UserRoleEnum.STORE_USER);
 
+        int adminUserId = 1;
+        UserRoleVO adminRole = new UserRoleVO(UserRoleEnum.ADMIN);
         UserEntity adminUser = new UserEntity();
         adminUser.setId(adminUserId);
         adminUser.setRole(adminRole);
 
+        int userId = 2;
+        UserRoleVO role = new UserRoleVO(UserRoleEnum.STORE_USER);
         UserEntity userEntity = new UserEntity();
         userEntity.setId(userId);
-        userEntity.setName("Roberto Messa");
+        userEntity.setEmail("myemail@emailhost.com");
 
         UserEntity userCreated = UserService.createUser(adminUser, userEntity, this.userRepository, this.eventObserver);
         assertEquals(userId, userEntity.getId());
