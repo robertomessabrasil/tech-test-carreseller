@@ -1,8 +1,8 @@
-package com.robertomessabrasil.carreseller.domain.observer.listener.security;
+package com.robertomessabrasil.carreseller.listener;
 
-import com.robertomessabrasil.carreseller.domain.observer.listener.Event;
-import com.robertomessabrasil.carreseller.domain.observer.listener.EventListener;
 import com.robertomessabrasil.carreseller.domain.service.user.event.InvalidRoleEvent;
+import io.github.robertomessabrasil.jwatch.observer.listener.Event;
+import io.github.robertomessabrasil.jwatch.observer.listener.EventListener;
 
 public class SecurityListener extends EventListener {
     @Override

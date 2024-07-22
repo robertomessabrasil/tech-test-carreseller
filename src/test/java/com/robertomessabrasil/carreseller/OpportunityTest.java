@@ -8,13 +8,13 @@ import com.robertomessabrasil.carreseller.domain.entity.user.UserEntity;
 import com.robertomessabrasil.carreseller.domain.entity.user.UserRoleEnum;
 import com.robertomessabrasil.carreseller.domain.entity.user.UserRoleVO;
 import com.robertomessabrasil.carreseller.domain.entity.user.event.UserValidationEvent;
-import com.robertomessabrasil.carreseller.domain.exception.InterruptException;
-import com.robertomessabrasil.carreseller.domain.observer.EventObserver;
-import com.robertomessabrasil.carreseller.domain.observer.listener.security.SecurityListener;
-import com.robertomessabrasil.carreseller.domain.observer.listener.validation.ValidationListener;
 import com.robertomessabrasil.carreseller.domain.repository.IOpportunityRepository;
 import com.robertomessabrasil.carreseller.domain.service.StoreService;
 import com.robertomessabrasil.carreseller.domain.service.user.event.InvalidRoleEvent;
+import com.robertomessabrasil.carreseller.listener.SecurityListener;
+import com.robertomessabrasil.carreseller.listener.ValidationListener;
+import io.github.robertomessabrasil.jwatch.exception.InterruptException;
+import io.github.robertomessabrasil.jwatch.observer.EventObserver;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -41,8 +41,8 @@ public class OpportunityTest {
         SecurityListener securityListener = new SecurityListener();
         ValidationListener validationListener = new ValidationListener();
 
-        securityListener.setEventsOfInterest(List.of(InvalidRoleEvent.class));
-        validationListener.setEventsOfInterest(List.of(UserValidationEvent.class));
+        securityListener.addEvent(InvalidRoleEvent.class);
+        validationListener.addEvent(UserValidationEvent.class);
         eventObserver.subscribe(securityListener);
         eventObserver.subscribe(validationListener);
 

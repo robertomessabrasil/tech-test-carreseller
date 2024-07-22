@@ -3,7 +3,7 @@ package com.robertomessabrasil.carreseller.domain.repository;
 import com.robertomessabrasil.carreseller.domain.entity.store.CustomerEntity;
 import com.robertomessabrasil.carreseller.domain.entity.store.VehicleEntity;
 import com.robertomessabrasil.carreseller.domain.entity.store.opportunity.OpportunityEntity;
-import com.robertomessabrasil.carreseller.domain.observer.EventObserver;
+import io.github.robertomessabrasil.jwatch.observer.EventObserver;
 
 import java.util.Optional;
 

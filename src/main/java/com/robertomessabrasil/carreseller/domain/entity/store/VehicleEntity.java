@@ -1,6 +1,6 @@
 package com.robertomessabrasil.carreseller.domain.entity.store;
 
-import com.robertomessabrasil.carreseller.domain.observer.EventObserver;
+import io.github.robertomessabrasil.jwatch.observer.EventObserver;
 
 public class VehicleEntity {
     private int id;

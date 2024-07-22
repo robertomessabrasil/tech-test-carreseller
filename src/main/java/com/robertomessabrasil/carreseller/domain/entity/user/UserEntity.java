@@ -2,8 +2,8 @@ package com.robertomessabrasil.carreseller.domain.entity.user;
 
 import com.robertomessabrasil.carreseller.domain.entity.user.event.UserValidationCode;
 import com.robertomessabrasil.carreseller.domain.entity.user.event.UserValidationEvent;
-import com.robertomessabrasil.carreseller.domain.exception.InterruptException;
-import com.robertomessabrasil.carreseller.domain.observer.EventObserver;
+import io.github.robertomessabrasil.jwatch.exception.InterruptException;
+import io.github.robertomessabrasil.jwatch.observer.EventObserver;
 
 public class UserEntity {
 
@@ -58,14 +58,21 @@ public class UserEntity {
     }
 
     public void validate(EventObserver eventObserver) throws InterruptException {
-        UserValidationEvent userValidationEvent = new UserValidationEvent(this);
-        if (this.getName() == null) {
-            userValidationEvent.addCode(UserValidationCode.INVALID_NAME);
+
+        if ((this.name == null) || (this.name.length() < 3)) {
+            UserValidationEvent userValidationEvent = new UserValidationEvent();
+            userValidationEvent.setUser(this);
+            userValidationEvent.setCode(UserValidationCode.INVALID_NAME);
+            eventObserver.notify(userValidationEvent);
         }
-        if (this.getEmail() == null) {
-            userValidationEvent.addCode(UserValidationCode.INVALID_EMAIL);
+
+        if ((this.email == null) || (this.email.length() < 3)) {
+            UserValidationEvent userValidationEvent = new UserValidationEvent();
+            userValidationEvent.setUser(this);
+            userValidationEvent.setCode(UserValidationCode.INVALID_EMAIL);
+            eventObserver.notify(userValidationEvent);
         }
-        eventObserver.notify(userValidationEvent);
+
     }
 }
 

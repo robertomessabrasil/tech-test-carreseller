@@ -9,10 +9,10 @@ import com.robertomessabrasil.carreseller.domain.entity.store.opportunity.Opport
 import com.robertomessabrasil.carreseller.domain.entity.user.UserEntity;
 import com.robertomessabrasil.carreseller.domain.entity.user.UserRoleEnum;
 import com.robertomessabrasil.carreseller.domain.entity.user.UserRoleVO;
-import com.robertomessabrasil.carreseller.domain.exception.InterruptException;
-import com.robertomessabrasil.carreseller.domain.observer.EventObserver;
 import com.robertomessabrasil.carreseller.domain.repository.IOpportunityRepository;
 import com.robertomessabrasil.carreseller.domain.repository.IStoreRepository;
+import io.github.robertomessabrasil.jwatch.exception.InterruptException;
+import io.github.robertomessabrasil.jwatch.observer.EventObserver;
 
 import java.util.List;
 import java.util.Optional;

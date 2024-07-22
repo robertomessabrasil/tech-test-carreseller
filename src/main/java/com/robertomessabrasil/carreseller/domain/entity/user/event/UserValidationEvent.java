@@ -1,34 +1,32 @@
 package com.robertomessabrasil.carreseller.domain.entity.user.event;
 
 import com.robertomessabrasil.carreseller.domain.entity.user.UserEntity;
-import com.robertomessabrasil.carreseller.domain.observer.listener.Event;
-
-import java.util.ArrayList;
-import java.util.List;
+import io.github.robertomessabrasil.jwatch.observer.listener.Event;
 
 public class UserValidationEvent extends Event {
-    private UserEntity userEntity;
-    private final List<UserValidationCode> codes = new ArrayList<>();
+    private UserEntity user;
+    private UserValidationCode code;
 
-    public UserValidationEvent(UserEntity userEntity) {
-        this.userEntity = userEntity;
+    public UserEntity getUser() {
+        return user;
     }
 
-    public UserEntity getUserEntity() {
-        return userEntity;
-    }
-
-    public UserValidationEvent setUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
+    public UserValidationEvent setUser(UserEntity user) {
+        this.user = user;
         return this;
     }
 
-    public UserValidationEvent addCode(UserValidationCode code) {
-        this.codes.add(code);
+    public UserValidationCode getCode() {
+        return code;
+    }
+
+    public UserValidationEvent setCode(UserValidationCode code) {
+        this.code = code;
         return this;
     }
 
-    public List<UserValidationCode> getCodes() {
-        return codes;
+    @Override
+    public String toString() {
+        return "Validation error: " + this.code;
     }
 }

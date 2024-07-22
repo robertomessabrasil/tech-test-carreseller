@@ -3,8 +3,8 @@ package com.robertomessabrasil.carreseller.domain.entity.store;
 import com.robertomessabrasil.carreseller.domain.entity.store.event.StoreValidationCode;
 import com.robertomessabrasil.carreseller.domain.entity.store.event.StoreValidationEvent;
 import com.robertomessabrasil.carreseller.domain.entity.store.opportunity.OpportunityEntity;
-import com.robertomessabrasil.carreseller.domain.exception.InterruptException;
-import com.robertomessabrasil.carreseller.domain.observer.EventObserver;
+import io.github.robertomessabrasil.jwatch.exception.InterruptException;
+import io.github.robertomessabrasil.jwatch.observer.EventObserver;
 
 import java.util.ArrayList;
 import java.util.List;

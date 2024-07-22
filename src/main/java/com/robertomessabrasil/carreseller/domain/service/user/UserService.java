@@ -1,12 +1,12 @@
 package com.robertomessabrasil.carreseller.domain.service.user;
 
 import com.robertomessabrasil.carreseller.domain.entity.user.UserEntity;
-import com.robertomessabrasil.carreseller.domain.exception.InterruptException;
-import com.robertomessabrasil.carreseller.domain.observer.EventObserver;
 import com.robertomessabrasil.carreseller.domain.repository.IUserRepository;
 import com.robertomessabrasil.carreseller.domain.service.user.event.InvalidRoleEvent;
 import com.robertomessabrasil.carreseller.domain.entity.user.UserRoleEnum;
 import com.robertomessabrasil.carreseller.domain.entity.user.UserRoleVO;
+import io.github.robertomessabrasil.jwatch.exception.InterruptException;
+import io.github.robertomessabrasil.jwatch.observer.EventObserver;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,7 +30,7 @@ public class UserService {
                 return;
             }
         }
-        eventObserver.notify(new InvalidRoleEvent());
+        eventObserver.notify(new InvalidRoleEvent(user.getRole().getRoleEnum()));
     }
 
 }

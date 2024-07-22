@@ -1,7 +1,7 @@
 package com.robertomessabrasil.carreseller.domain.entity.store.event;
 
 import com.robertomessabrasil.carreseller.domain.entity.store.StoreEntity;
-import com.robertomessabrasil.carreseller.domain.observer.listener.Event;
+import io.github.robertomessabrasil.jwatch.observer.listener.Event;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,5 +30,10 @@ public class StoreValidationEvent extends Event {
 
     public List<StoreValidationCode> getCodes() {
         return codes;
+    }
+
+    @Override
+    public String toString() {
+        return "";
     }
 }

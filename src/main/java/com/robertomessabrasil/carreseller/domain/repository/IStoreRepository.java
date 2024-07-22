@@ -1,7 +1,7 @@
 package com.robertomessabrasil.carreseller.domain.repository;
 
 import com.robertomessabrasil.carreseller.domain.entity.store.StoreEntity;
-import com.robertomessabrasil.carreseller.domain.observer.EventObserver;
+import io.github.robertomessabrasil.jwatch.observer.EventObserver;
 
 import java.util.List;
 import java.util.Optional;
