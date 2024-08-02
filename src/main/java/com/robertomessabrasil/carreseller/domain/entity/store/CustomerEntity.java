@@ -43,7 +43,7 @@ public class CustomerEntity {
     }
 
     public void validate(EventObserver eventObserver) {
-
+        // to do
     }
 }
 

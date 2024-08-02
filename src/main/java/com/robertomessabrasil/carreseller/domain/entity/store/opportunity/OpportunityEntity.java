@@ -58,5 +58,6 @@ public class OpportunityEntity {
     }
 
     public void validate(EventObserver eventObserver) {
+        // to do
     }
 }

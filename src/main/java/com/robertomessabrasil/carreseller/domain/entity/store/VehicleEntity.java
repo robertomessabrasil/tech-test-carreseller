@@ -55,6 +55,6 @@ public class VehicleEntity {
     }
 
     public void validate(EventObserver eventObserver) {
-
+        // to do
     }
 }

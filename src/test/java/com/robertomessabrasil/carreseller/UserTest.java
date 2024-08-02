@@ -1,31 +1,30 @@
 package com.robertomessabrasil.carreseller;
 
 import com.robertomessabrasil.carreseller.domain.entity.user.UserEntity;
+import com.robertomessabrasil.carreseller.domain.entity.user.UserRoleEnum;
+import com.robertomessabrasil.carreseller.domain.entity.user.UserRoleVO;
 import com.robertomessabrasil.carreseller.domain.entity.user.event.UserValidationEvent;
+import com.robertomessabrasil.carreseller.domain.exception.InfrastructureException;
 import com.robertomessabrasil.carreseller.domain.repository.IUserRepository;
 import com.robertomessabrasil.carreseller.domain.service.user.UserService;
 import com.robertomessabrasil.carreseller.domain.service.user.event.InvalidRoleEvent;
-import com.robertomessabrasil.carreseller.domain.entity.user.UserRoleEnum;
-import com.robertomessabrasil.carreseller.domain.entity.user.UserRoleVO;
 import com.robertomessabrasil.carreseller.listener.SecurityListener;
 import com.robertomessabrasil.carreseller.listener.ValidationListener;
 import io.github.robertomessabrasil.jwatch.exception.InterruptException;
 import io.github.robertomessabrasil.jwatch.observer.EventObserver;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class UserTest {
+class UserTest {
 
     @Mock
     IUserRepository userRepository;
@@ -46,7 +45,7 @@ public class UserTest {
     }
 
     @Test
-    void givenParameters_createUser() throws InterruptException {
+    void givenParameters_createUser() throws InterruptException, InfrastructureException {
 
 
         int adminUserId = 1;
@@ -56,18 +55,19 @@ public class UserTest {
         adminUser.setRole(adminRole);
 
         int userId = 2;
-        UserRoleVO role = new UserRoleVO(UserRoleEnum.STORE_USER);
         UserEntity userEntity = new UserEntity();
         userEntity.setId(userId);
         userEntity.setEmail("myemail@emailhost.com");
 
+        when(this.userRepository.create(userEntity, eventObserver)).thenReturn(userEntity);
+
         UserEntity userCreated = UserService.createUser(adminUser, userEntity, this.userRepository, this.eventObserver);
-        assertEquals(userId, userEntity.getId());
+        assertEquals(userId, userCreated.getId());
 
     }
 
     @Test
-    void givenUserId_findUser() throws InterruptException {
+    void givenUserId_findUser() throws InfrastructureException {
 
         int userId = 1;
 
