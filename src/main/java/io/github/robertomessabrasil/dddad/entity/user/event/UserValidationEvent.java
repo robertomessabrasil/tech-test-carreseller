@@ -1,6 +1,6 @@
-package io.github.robertomessabrasil.dddad.domain.entity.user.event;
+package io.github.robertomessabrasil.dddad.entity.user.event;
 
-import io.github.robertomessabrasil.dddad.domain.entity.user.UserEntity;
+import io.github.robertomessabrasil.dddad.entity.user.UserEntity;
 import io.github.robertomessabrasil.jwatch.observer.listener.Event;
 
 public class UserValidationEvent extends Event {

@@ -1,12 +1,12 @@
 package io.github.robertomessabrasil.dddad;
 
 import io.github.robertomessabrasil.dddad.listener.SecurityListener;
-import io.github.robertomessabrasil.dddad.domain.entity.user.UserEntity;
-import io.github.robertomessabrasil.dddad.domain.repository.IUserRepository;
-import io.github.robertomessabrasil.dddad.domain.service.user.UserService;
-import io.github.robertomessabrasil.dddad.domain.service.user.event.InvalidRoleEvent;
-import io.github.robertomessabrasil.dddad.domain.entity.user.UserRoleEnum;
-import io.github.robertomessabrasil.dddad.domain.entity.user.UserRoleVO;
+import io.github.robertomessabrasil.dddad.entity.user.UserEntity;
+import io.github.robertomessabrasil.dddad.repository.IUserRepository;
+import io.github.robertomessabrasil.dddad.service.user.UserService;
+import io.github.robertomessabrasil.dddad.service.user.event.InvalidRoleEvent;
+import io.github.robertomessabrasil.dddad.entity.user.UserRoleEnum;
+import io.github.robertomessabrasil.dddad.entity.user.UserRoleVO;
 import io.github.robertomessabrasil.jwatch.exception.InterruptException;
 import io.github.robertomessabrasil.jwatch.observer.EventObserver;
 import org.junit.jupiter.api.BeforeEach;

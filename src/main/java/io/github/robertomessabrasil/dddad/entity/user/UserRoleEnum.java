@@ -1,4 +1,4 @@
-package io.github.robertomessabrasil.dddad.domain.entity.user;
+package io.github.robertomessabrasil.dddad.entity.user;
 
 public enum UserRoleEnum {
     ADMIN(0), STORE_OWNER(1), STORE_MANAGER(2), STORE_USER(3);

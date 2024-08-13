@@ -1,7 +1,8 @@
-package io.github.robertomessabrasil.dddad.domain.entity.user;
+package io.github.robertomessabrasil.dddad.entity.user;
 
-import io.github.robertomessabrasil.dddad.domain.entity.user.event.UserValidationCode;
-import io.github.robertomessabrasil.dddad.domain.entity.user.event.UserValidationEvent;
+import io.github.robertomessabrasil.dddad.entity.user.event.UserValidationCode;
+import io.github.robertomessabrasil.dddad.entity.user.event.UserValidationEvent;
+import io.github.robertomessabrasil.dddad.repository.IUserRepository;
 import io.github.robertomessabrasil.jwatch.exception.InterruptException;
 import io.github.robertomessabrasil.jwatch.observer.EventObserver;
 

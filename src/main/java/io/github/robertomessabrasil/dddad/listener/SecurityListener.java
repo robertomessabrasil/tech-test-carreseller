@@ -1,6 +1,6 @@
 package io.github.robertomessabrasil.dddad.listener;
 
-import io.github.robertomessabrasil.dddad.domain.service.user.event.InvalidRoleEvent;
+import io.github.robertomessabrasil.dddad.service.user.event.InvalidRoleEvent;
 import io.github.robertomessabrasil.jwatch.observer.listener.Event;
 import io.github.robertomessabrasil.jwatch.observer.listener.EventListener;
 

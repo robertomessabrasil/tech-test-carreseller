@@ -1,4 +1,4 @@
-package io.github.robertomessabrasil.dddad.domain.entity.user.event;
+package io.github.robertomessabrasil.dddad.entity.user.event;
 
 public enum UserValidationCode {
     INVALID_NAME(0),INVALID_EMAIL(1),INVALID_ROLE(2);

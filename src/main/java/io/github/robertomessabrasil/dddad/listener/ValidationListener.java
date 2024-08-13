@@ -1,8 +1,8 @@
 package io.github.robertomessabrasil.dddad.listener;
 
-import io.github.robertomessabrasil.dddad.domain.entity.user.event.UserValidationCode;
-import io.github.robertomessabrasil.dddad.domain.entity.user.event.UserValidationEvent;
-import io.github.robertomessabrasil.dddad.domain.repository.event.UserRepositoryEvent;
+import io.github.robertomessabrasil.dddad.entity.user.event.UserValidationCode;
+import io.github.robertomessabrasil.dddad.entity.user.event.UserValidationEvent;
+import io.github.robertomessabrasil.dddad.repository.event.UserRepositoryEvent;
 import io.github.robertomessabrasil.jwatch.observer.listener.Event;
 import io.github.robertomessabrasil.jwatch.observer.listener.EventListener;
 
