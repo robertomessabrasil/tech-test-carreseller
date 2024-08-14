@@ -3,6 +3,7 @@ package io.github.robertomessabrasil.dddad.service.user;
 import io.github.robertomessabrasil.dddad.entity.user.UserEntity;
 import io.github.robertomessabrasil.dddad.entity.user.UserRoleEnum;
 import io.github.robertomessabrasil.dddad.entity.user.UserRoleVO;
+import io.github.robertomessabrasil.dddad.entity.user.UserValidation;
 import io.github.robertomessabrasil.dddad.repository.IUserRepository;
 import io.github.robertomessabrasil.dddad.service.user.event.InvalidRoleEvent;
 import io.github.robertomessabrasil.jwatch.exception.InterruptException;
@@ -13,10 +14,9 @@ import java.util.Optional;
 
 public class UserService {
 
-    public static UserEntity createUser(UserEntity adminUser, UserEntity user, IUserRepository userRepository, EventObserver eventObserver) throws InterruptException {
+    public static UserEntity createStoreUser(UserEntity adminUser, UserEntity user, IUserRepository userRepository, EventObserver eventObserver) throws InterruptException {
         checkRole(adminUser, List.of(new UserRoleVO(UserRoleEnum.ADMIN)), eventObserver);
-        user.setRole(new UserRoleVO(UserRoleEnum.STORE_USER));
-        user.validate(eventObserver);
+        UserValidation.validateStoreUser(user, eventObserver);
         return userRepository.create(user, eventObserver);
     }
 

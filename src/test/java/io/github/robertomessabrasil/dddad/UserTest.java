@@ -1,14 +1,14 @@
 package io.github.robertomessabrasil.dddad;
 
-import io.github.robertomessabrasil.dddad.listener.SecurityListener;
 import io.github.robertomessabrasil.dddad.entity.user.UserEntity;
 import io.github.robertomessabrasil.dddad.entity.user.UserRoleEnum;
 import io.github.robertomessabrasil.dddad.entity.user.UserRoleVO;
 import io.github.robertomessabrasil.dddad.entity.user.event.UserValidationEvent;
+import io.github.robertomessabrasil.dddad.listener.SecurityListener;
+import io.github.robertomessabrasil.dddad.listener.ValidationListener;
 import io.github.robertomessabrasil.dddad.repository.IUserRepository;
 import io.github.robertomessabrasil.dddad.service.user.UserService;
 import io.github.robertomessabrasil.dddad.service.user.event.InvalidRoleEvent;
-import io.github.robertomessabrasil.dddad.listener.ValidationListener;
 import io.github.robertomessabrasil.jwatch.exception.InterruptException;
 import io.github.robertomessabrasil.jwatch.observer.EventObserver;
 import org.junit.jupiter.api.BeforeEach;
@@ -46,21 +46,23 @@ class UserTest {
     @Test
     void givenParameters_createUser() throws InterruptException {
 
-
         int adminUserId = 1;
         UserRoleVO adminRole = new UserRoleVO(UserRoleEnum.ADMIN);
-        UserEntity adminUser = new UserEntity();
-        adminUser.setId(adminUserId);
-        adminUser.setRole(adminRole);
+        UserEntity adminUser = new UserEntity()
+                .setId(adminUserId)
+                .setRole(adminRole);
 
         int userId = 2;
-        UserEntity userEntity = new UserEntity();
-        userEntity.setId(userId);
-        userEntity.setEmail("myemail@emailhost.com");
+        UserRoleVO userRole = new UserRoleVO(UserRoleEnum.STORE_USER);
+        String userEmail = "myemail@emailhost.com";
+        UserEntity userEntity = new UserEntity().
+                setId(userId)
+                .setEmail(userEmail)
+                .setRole(userRole);
 
         when(this.userRepository.create(userEntity, eventObserver)).thenReturn(userEntity);
 
-        UserEntity userCreated = UserService.createUser(adminUser, userEntity, this.userRepository, this.eventObserver);
+        UserEntity userCreated = UserService.createStoreUser(adminUser, userEntity, this.userRepository, this.eventObserver);
         assertEquals(userId, userCreated.getId());
 
     }

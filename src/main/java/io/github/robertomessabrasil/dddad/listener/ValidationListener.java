@@ -16,6 +16,9 @@ public class ValidationListener extends EventListener {
             if (userValidationEvent.getCode().equals(UserValidationCode.INVALID_EMAIL)) {
                 return true;
             }
+            if (userValidationEvent.getCode().equals(UserValidationCode.INVALID_ROLE)) {
+                return true;
+            }
         }
         if(event instanceof UserRepositoryEvent userRepositoryEvent) {
             return true;

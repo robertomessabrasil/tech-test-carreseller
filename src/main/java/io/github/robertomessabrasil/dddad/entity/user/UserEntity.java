@@ -1,15 +1,20 @@
 package io.github.robertomessabrasil.dddad.entity.user;
 
-import io.github.robertomessabrasil.dddad.entity.user.event.UserValidationCode;
-import io.github.robertomessabrasil.dddad.entity.user.event.UserValidationEvent;
-import io.github.robertomessabrasil.dddad.repository.IUserRepository;
-import io.github.robertomessabrasil.jwatch.exception.InterruptException;
-import io.github.robertomessabrasil.jwatch.observer.EventObserver;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Positive;
 
 public class UserEntity {
 
+    public static final String ID = "ID";
+    public static final String NAME = "NAME";
+    public static final String EMAIL = "EMAIL";
+
+    @Positive
     private int id;
+    @NotEmpty
     private String name;
+    @Email(message = EMAIL)
     private String email;
     private UserRoleVO role;
 
@@ -55,24 +60,7 @@ public class UserEntity {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
+                ", role=" + role +
                 '}';
-    }
-
-    public void validate(EventObserver eventObserver) throws InterruptException {
-
-        if ((this.name == null) || (this.name.length() < 3)) {
-            UserValidationEvent userValidationEvent = new UserValidationEvent();
-            userValidationEvent.setUser(this);
-            userValidationEvent.setCode(UserValidationCode.INVALID_NAME);
-            eventObserver.notify(userValidationEvent);
-        }
-
-        if ((this.email == null) || (this.email.length() < 3)) {
-            UserValidationEvent userValidationEvent = new UserValidationEvent();
-            userValidationEvent.setUser(this);
-            userValidationEvent.setCode(UserValidationCode.INVALID_EMAIL);
-            eventObserver.notify(userValidationEvent);
-        }
-
     }
 }

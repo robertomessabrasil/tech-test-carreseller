@@ -46,7 +46,7 @@ public class SecurityTest {
         userEntity.setRole(userRole);
 
         Throwable exception = assertThrows(InterruptException.class, () -> {
-            UserEntity userCreated = UserService.createUser(userEntity, userEntity, this.userRepository, this.eventObserver);
+            UserEntity userCreated = UserService.createStoreUser(userEntity, userEntity, this.userRepository, this.eventObserver);
         });
 
         assertNotNull(exception);
